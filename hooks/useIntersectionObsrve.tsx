@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  ReactNode,
+  ReactComponentElement,
+  ReactElement,
+  Ref,
+  useEffect,
+  useState,
+} from "react";
 
 const useIntersectionObserver = (
-  entries: string,
-  root: string,
+  entries: any,
+  root: any,
   threshold: number = 0
 ) => {
   const [obj, setObj] = useState<Array<IntersectionObserverEntry>>();
@@ -10,7 +17,7 @@ const useIntersectionObserver = (
   useEffect(() => {
     if (typeof window !== undefined) {
       const option = {
-        root: document.getElementById(root),
+        root: root.current,
         rootMargin: "0px",
         threshold: threshold,
       };
@@ -19,12 +26,12 @@ const useIntersectionObserver = (
         setObj(entries);
       };
       const observer = new IntersectionObserver(handler, option);
-      const target = document.getElementById(entries);
+      const target = entries.current;
       if (target) {
         observer.observe(target);
       }
     }
-  });
+  }, [entries, root, threshold]);
   return obj;
 };
 

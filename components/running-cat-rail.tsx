@@ -1,6 +1,6 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-export const RunningCatRail = ({ children }) => {
+const RunningCatRail = forwardRef((props: any, ref: any) => {
   return (
     <div
       id="running-cat-rail"
@@ -8,7 +8,10 @@ export const RunningCatRail = ({ children }) => {
   -translate-x-1/2 -translate-y-1/2 bg-red-500 h-[50px] w-full
   "
     >
-      {children}
+      {props.children}
     </div>
   );
-};
+});
+RunningCatRail.displayName = "RunningCatRail";
+
+export default RunningCatRail;

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { forwardRef, useEffect } from "react";
 import Image from "next/image";
 import nyan from "../public/nyan.gif";
 import useCalcDiv from "@/hooks/useCalcDiv";
 
-const RunningCat = () => {
-  const {} = useCalcDiv("running-cat-rail");
+const RunningCat = (props: any) => {
+  const { w, h } = useCalcDiv("running-cat-rail");
+
+  useEffect(() => {}, []);
 
   return (
     <div>
