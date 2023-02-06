@@ -1,18 +1,31 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import Image from "next/image";
 import nyan from "../public/nyan.gif";
 import useCalcDiv from "@/hooks/useCalcDiv";
 import { motion } from "framer-motion";
 import { calculateMove } from "./utils/utils";
-const RunningCat = ({ w, h }: { w: number; h: number }) => {
+import useViewPort from "@/hooks/useViewPort";
+
+const RunningCat = ({ onFinish, onClick }) => {
+  const variants = calculateMove(375, 600);
+  console.log(variants);
+  //--- capture cat-----
+  const [capture, setCapture] = useState(false);
+
+  //---------
+
+  console.log(variants);
+
   return (
     <motion.div
-      //   initial={"begin"}
-      //   animate={"end"}
-      //   transition={{ duration: 3 }}
-      //   variants={calculateMove(w, h)}
+      initial={"begin"}
+      animate={"end"}
+      onClick={onClick}
+      transition={{ duration: 3, type: "easeInOut" }}
+      variants={variants}
+      onAnimationComplete={onFinish}
       id="running-cat-rail"
-      className="relative top-1/2 left-1/2 rotate-90 origin-center
+      className="relative top-1/2 z-10 left-1/2 rot origin-center
 -translate-x-1/2 -translate-y-1/2 bg-red-500 h-[50px] w-[100px]
 "
     >
